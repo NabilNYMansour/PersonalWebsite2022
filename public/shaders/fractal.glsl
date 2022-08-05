@@ -7,7 +7,6 @@ uniform float u_time;
 
 #define PI 3.1415926538
 
-
 float gt(float v1,float v2)
 {
     return step(v2,v1);
