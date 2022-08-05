@@ -1,38 +1,224 @@
-.App {
-  text-align: center;
+:root {
+  --animation-duration: 0.25s;
+  --color: rgb(52, 186, 186);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html,
+body,
+#app,
+#app > div {
+  height: 100%;
+  overflow-y: hidden;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+#root {
+  overflow-y: hidden;
+  height: 100%;
+  font-family: "Courier New", Courier, monospace;
+  overflow-x: hidden;
+}
+
+.main-app {
+  overflow: hidden;
+}
+
+@keyframes item-motion {
+  from {
+    opacity: 0%;
+  }
+  to {
+    opacity: 100%;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+@keyframes item-motion-reverse {
+  from {
+    opacity: 100%;
+  }
+  to {
+    opacity: 0%;
+  }
+}
+
+.main-app-home {
+  animation-name: item-motion;
+  animation-duration: var(--animation-duration);
+  padding-top: 30vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: #d4d9e1;
+  gap: 40px;
+  height: 100vh;
+}
+
+.main-app-home-exit {
+  animation-name: item-motion-reverse;
+  animation-duration: var(--animation-duration);
+  padding-top: 30vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #d4d9e1;
+  gap: 40px;
+  height: 100vh;
+  opacity: 0%;
+}
+
+.main-app-item {
+  animation-name: item-motion;
+  animation-duration: var(--animation-duration);
+  padding-top: 15vh;
+  padding-left: 30vw;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  color: #d4d9e1;
+  gap: 50px;
+  height: 100vh;
+}
+
+.main-app-item-exit {
+  animation-name: item-motion-reverse;
+  animation-duration: var(--animation-duration);
+  padding-top: 15vh;
+  padding-left: 30vw;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  color: #d4d9e1;
+  gap: 50px;
+  height: 100vh;
+  opacity: 0%;
+}
+
+.title {
+  font-size: 5em;
+}
+
+.name {
+  color: var(--color);
+}
+
+.sub-title {
+  font-size: 4em;
+}
+
+.cursor {
+  background-color: #d4d9e1;
+}
+
+.background-shader {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-align: center;
+  z-index: -1;
+  background-color: #201f29;
+}
+
+.background-shader-off {
+  width: 100vh;
+  height: 100vh;
+}
+
+.top-bar {
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  background-color: #201f29a0;
+  gap: 10px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  z-index: 3;
 }
 
-.App-link {
-  color: #61dafb;
+.bar {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 4px;
+  font-size: 1.5em;
 }
 
-@keyframes App-logo-spin {
+@keyframes hover-button {
   from {
-    transform: rotate(0deg);
+    color: #d4d9e1;
   }
   to {
-    transform: rotate(360deg);
+    background-color: #d4d9e1;
+    color: #201f29;
   }
+}
+
+button {
+  font-family: "Courier New", Courier, monospace;
+  background-color: #00000000;
+  color: #d4d9e1;
+  border: none;
+  font-size: 1.5em;
+  margin: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+button:hover {
+  animation-name: hover-button;
+  animation-duration: 0.2s;
+  background-color: #d4d9e1;
+  color: #201f29;
+  font-weight: 700;
+}
+
+.background-shader {
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  z-index: -1;
+  background-color: #201f29;
+}
+
+.shader-toggle {
+  position: absolute;
+  border-radius: 50px;
+  margin: 3px;
+  height: 40px;
+  width: 40px;
+  padding: 0;
+  z-index: 4;
+}
+
+.warning-background {
+  background-color: #201f29;
+}
+
+.warning-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  color: #d4d9e1;
+  gap: 50px;
+}
+
+.warning-container-fade {
+  animation-name: item-motion-reverse;
+  animation-duration: 0.5s;
+  opacity: 0%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  color: #d4d9e1;
+  gap: 50px;
 }
