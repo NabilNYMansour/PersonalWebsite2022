@@ -73,9 +73,9 @@ export const BackGroundShader = ({ shaderToggle, tabQueue, setTabQueue }) => {
         <div className="shader">
           <ShaderCanvas
             uniforms={{
-              currentTab:currentTabInQueue,
-              previousTab:previousTabInQueue,
-              timeChange:timeChange
+              currentTab: currentTabInQueue,
+              previousTab: previousTabInQueue,
+              timeChange: timeChange,
             }}
             width={width}
             height={height}

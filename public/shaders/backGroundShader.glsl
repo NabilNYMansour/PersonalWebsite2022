@@ -4,6 +4,8 @@ precision mediump float;
 
 uniform vec2 u_resolution;
 uniform float u_time;
+uniform vec2 u_mouse;
+
 uniform float timeChange;
 uniform float currentTab;
 uniform float previousTab;
@@ -154,17 +156,17 @@ float fbm(vec2 xy)// Fractal Brownian Motion
     return val;
 }
 
-void fbmRain(vec2 xy,inout vec3 col,float pixel)
+void fbmRain(vec2 xy,inout vec3 col,float pixel,vec2 mouse)
 {
     vec2 q;
     q.x=fbm(xy+u_time/10.);
-    q.y=fbm(xy+vec2(1));;
+    q.y=fbm(xy-mouse);
     
     vec2 r;
     r.x=snoise(xy+1.*q+vec2(1.7,9.2)+.15*u_time);
     r.y=fbm(xy+1.*q+vec2(8.3,2.8)+.126*u_time);
-
-    vec2 p = xy+q-r;
+    
+    vec2 p=xy+q-r;
     
     float fbm=fbm(p);
     
@@ -172,66 +174,66 @@ void fbmRain(vec2 xy,inout vec3 col,float pixel)
     vec3 colB1=vec3(.666667,.666667,.498039);
     vec3 colC1=vec3(0,0,.164706);
     vec3 colD1=vec3(.5,.75,.75);
-
+    
     vec3 colA2=vec3(q.x,q.y,r.x);
     vec3 colB2=vec3(r.x,r.y,q.x);
     vec3 colC2=vec3(q.x*r.x,r.x*q.y,q.y*r.y);
-    vec3 colD2=vec3(r.x-r.y,q.y/q.x,r.y/q.x)*0.4;
-
+    vec3 colD2=vec3(r.x-r.y,q.y/q.x,r.y/q.x)*.4;
+    
     vec3 colA3=vec3(q.x,q.y,r.x);
     vec3 colB3=vec3(r.x,r.y,q.x);
     vec3 colC3=vec3(q.x+r.x,r.x*q.y,0.);
-    vec3 colD3=vec3(r.x+r.y,q.y/q.x,r.y-q.x)*0.5;
-
-    vec3 colA4=vec3(q.y*r.y,q.x*r.x,q.y*r.y)*0.1;
-    vec3 colB4=vec3(q.y*r.y,q.x*r.x,q.y-r.y)*6.;
-    vec3 colC4=vec3(r.y-r.y,r.x/r.x,q.y+q.y)*0.75;
-    vec3 colD4=vec3(q.y*r.y,q.x*r.x,q.y*r.y)*0.2;
-
-    vec3 colAb=colA1*eq(previousTab,0.,.1)
-              +colA2*eq(previousTab,1.,.1)
-              +colA3*eq(previousTab,2.,.1)
-              +colA4*eq(previousTab,3.,.1);
-
-    vec3 colAa=colA1*eq(currentTab,0.,.1)
-              +colA2*eq(currentTab,1.,.1)
-              +colA3*eq(currentTab,2.,.1)
-              +colA4*eq(currentTab,3.,.1);
-
-    vec3 colBb=colB1*eq(previousTab,0.,.1)
-              +colB2*eq(previousTab,1.,.1)
-              +colB3*eq(previousTab,2.,.1)
-              +colB4*eq(previousTab,3.,.1);
-
-    vec3 colBa=colB1*eq(currentTab,0.,.1)
-              +colB2*eq(currentTab,1.,.1)
-              +colB3*eq(currentTab,2.,.1)
-              +colB4*eq(currentTab,3.,.1);
-
-    vec3 colCb=colC1*eq(previousTab,0.,.1)
-              +colC2*eq(previousTab,1.,.1)
-              +colC3*eq(previousTab,2.,.1)
-              +colC4*eq(previousTab,3.,.1);
-
-    vec3 colCa=colC1*eq(currentTab,0.,.1)
-              +colC2*eq(currentTab,1.,.1)
-              +colC3*eq(currentTab,2.,.1)
-              +colC4*eq(currentTab,3.,.1);
-
-    vec3 colDb=colD1*eq(previousTab,0.,.1)
-              +colD2*eq(previousTab,1.,.1)
-              +colD3*eq(previousTab,2.,.1)
-              +colD4*eq(previousTab,3.,.1);
-
-    vec3 colDa=colD1*eq(currentTab,0.,.1)
-              +colD2*eq(currentTab,1.,.1)
-              +colD3*eq(currentTab,2.,.1)
-              +colD4*eq(currentTab,3.,.1);
+    vec3 colD3=vec3(r.x+r.y,q.y/q.x,r.y-q.x)*.5;
     
-    vec3 colA=mix(colAb,colAa,clamp(timeChange,0.,1.));
-    vec3 colB=mix(colBb,colBa,clamp(timeChange,0.,1.));
-    vec3 colC=mix(colCb,colCa,clamp(timeChange,0.,1.));
-    vec3 colD=mix(colDb,colDa,clamp(timeChange,0.,1.));
+    vec3 colA4=vec3(q.y*r.y,q.x*r.x,q.y*r.y)*.1;
+    vec3 colB4=vec3(q.y*r.y*6.,q.x*r.x,q.y-r.y);
+    vec3 colC4=vec3(r.y-r.y,r.x/r.x,q.y+q.y)*.75;
+    vec3 colD4=vec3(q.y*r.y,q.x*r.x,q.y*r.y)*.2;
+    
+    vec3 colAb=colA1*eq(previousTab,0.,.1)
+    +colA2*eq(previousTab,1.,.1)
+    +colA3*eq(previousTab,2.,.1)
+    +colA4*eq(previousTab,3.,.1);
+    
+    vec3 colAa=colA1*eq(currentTab,0.,.1)
+    +colA2*eq(currentTab,1.,.1)
+    +colA3*eq(currentTab,2.,.1)
+    +colA4*eq(currentTab,3.,.1);
+    
+    vec3 colBb=colB1*eq(previousTab,0.,.1)
+    +colB2*eq(previousTab,1.,.1)
+    +colB3*eq(previousTab,2.,.1)
+    +colB4*eq(previousTab,3.,.1);
+    
+    vec3 colBa=colB1*eq(currentTab,0.,.1)
+    +colB2*eq(currentTab,1.,.1)
+    +colB3*eq(currentTab,2.,.1)
+    +colB4*eq(currentTab,3.,.1);
+    
+    vec3 colCb=colC1*eq(previousTab,0.,.1)
+    +colC2*eq(previousTab,1.,.1)
+    +colC3*eq(previousTab,2.,.1)
+    +colC4*eq(previousTab,3.,.1);
+    
+    vec3 colCa=colC1*eq(currentTab,0.,.1)
+    +colC2*eq(currentTab,1.,.1)
+    +colC3*eq(currentTab,2.,.1)
+    +colC4*eq(currentTab,3.,.1);
+    
+    vec3 colDb=colD1*eq(previousTab,0.,.1)
+    +colD2*eq(previousTab,1.,.1)
+    +colD3*eq(previousTab,2.,.1)
+    +colD4*eq(previousTab,3.,.1);
+    
+    vec3 colDa=colD1*eq(currentTab,0.,.1)
+    +colD2*eq(currentTab,1.,.1)
+    +colD3*eq(currentTab,2.,.1)
+    +colD4*eq(currentTab,3.,.1);
+    
+    vec3 colA=mix(colAb,colAa,timeChange);
+    vec3 colB=mix(colBb,colBa,timeChange);
+    vec3 colC=mix(colCb,colCa,timeChange);
+    vec3 colD=mix(colDb,colDa,timeChange);
     
     col=mix(colA,colB,clamp((fbm*fbm)*4.,0.,1.));
     col=mix(col,colC,clamp(length(q),0.,1.));
@@ -242,6 +244,7 @@ void main()
 {
     // Getting values
     vec2 uv=gl_FragCoord.xy/u_resolution.xy;
+    vec2 mouse = u_mouse.xy/u_resolution.xy;
     
     // Setting up view port
     float zoom=10.;
@@ -252,8 +255,12 @@ void main()
     // EscurrentTablishing screen xy values
     vec2 xy=(uv-viewPortCenter)*zoom+zoomCenter;
     xy=vec2(xy.x,xy.y*ratio);
-    
     xy=rotate(xy,-PI/4.);
+
+    // Establishing mouse xy values
+    mouse = (mouse - viewPortCenter) * zoom + zoomCenter;
+    // mouse.y *= ratio;
+    mouse=rotate(mouse,-PI/4.);
     
     // Width of a single pixel
     float pixel=zoom/u_resolution.x;
@@ -261,7 +268,7 @@ void main()
     // Color init
     vec3 col=vec3(0.);
     
-    fbmRain(xy,col,pixel);
-    
+    fbmRain(xy,col,pixel,mouse/8.);
+
     gl_FragColor=vec4(col,1);
 }

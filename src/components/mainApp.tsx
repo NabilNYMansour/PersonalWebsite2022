@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { BackGroundShader } from "./shaders-react-components/backGroundShader";
-import { FractalShader } from "./shaders-react-components/fractalShader";
 import { AboutTab } from "./tabs/aboutTab";
 import { HomeTab } from "./tabs/homeTab";
 import { ProjectsTab } from "./tabs/projectsTab";
@@ -42,7 +41,7 @@ export const MainApp = ({
   }, [currentTab]);
 
   return (
-    <div className="main-app">
+    <div>
       {tab === 0 /* Home */ ? (
         <HomeTab exit={exit} setCurrentTab={setCurrentTab} />
       ) : tab === 1 /* About */ ? (

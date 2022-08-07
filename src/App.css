@@ -18,10 +18,6 @@ body,
   overflow-x: hidden;
 }
 
-.main-app {
-  overflow: hidden;
-}
-
 @keyframes item-motion {
   from {
     opacity: 0%;
