@@ -5,8 +5,8 @@ precision mediump float;
 uniform vec2 u_resolution;
 uniform float u_time;
 uniform float timeChange;
-uniform float tab;
 uniform float currentTab;
+uniform float previousTab;
 
 #define PI 3.1415926538
 
@@ -162,26 +162,80 @@ void fbmRain(vec2 xy,inout vec3 col,float pixel)
     
     vec2 r;
     r.x=snoise(xy+1.*q+vec2(1.7,9.2)+.15*u_time);
-    r.y=snoise(xy+1.*q+vec2(8.3,2.8)+.126*u_time);
+    r.y=fbm(xy+1.*q+vec2(8.3,2.8)+.126*u_time);
+
+    vec2 p = xy+q-r;
     
-    float fbm=fbm(xy+q-r);
+    float fbm=fbm(p);
     
-    vec3 bb=vec3(.1333,.7922,.7922)*eq(currentTab,0.,.1)+vec3(.7922,.1333,.1333)*eq(currentTab,1.,.1);
-    vec3 ba=vec3(.1333,.7922,.7922)*eq(tab,0.,.1)+vec3(.7922,.1333,.1333)*eq(tab,1.,.1);
+    vec3 colA1=vec3(.101961,.619608,.666667);
+    vec3 colB1=vec3(.666667,.666667,.498039);
+    vec3 colC1=vec3(0,0,.164706);
+    vec3 colD1=vec3(.5,.75,.75);
+
+    vec3 colA2=vec3(q.x,q.y,r.x);
+    vec3 colB2=vec3(r.x,r.y,q.x);
+    vec3 colC2=vec3(q.x*r.x,r.x*q.y,q.y*r.y);
+    vec3 colD2=vec3(r.x-r.y,q.y/q.x,r.y/q.x)*0.4;
+
+    vec3 colA3=vec3(q.x,q.y,r.x);
+    vec3 colB3=vec3(r.x,r.y,q.x);
+    vec3 colC3=vec3(q.x+r.x,r.x*q.y,0.);
+    vec3 colD3=vec3(r.x+r.y,q.y/q.x,r.y-q.x)*0.5;
+
+    vec3 colA4=vec3(q.y*r.y,q.x*r.x,q.y*r.y)*0.1;
+    vec3 colB4=vec3(q.y*r.y,q.x*r.x,q.y-r.y)*6.;
+    vec3 colC4=vec3(r.y-r.y,r.x/r.x,q.y+q.y)*0.75;
+    vec3 colD4=vec3(q.y*r.y,q.x*r.x,q.y*r.y)*0.2;
+
+    vec3 colAb=colA1*eq(previousTab,0.,.1)
+              +colA2*eq(previousTab,1.,.1)
+              +colA3*eq(previousTab,2.,.1)
+              +colA4*eq(previousTab,3.,.1);
+
+    vec3 colAa=colA1*eq(currentTab,0.,.1)
+              +colA2*eq(currentTab,1.,.1)
+              +colA3*eq(currentTab,2.,.1)
+              +colA4*eq(currentTab,3.,.1);
+
+    vec3 colBb=colB1*eq(previousTab,0.,.1)
+              +colB2*eq(previousTab,1.,.1)
+              +colB3*eq(previousTab,2.,.1)
+              +colB4*eq(previousTab,3.,.1);
+
+    vec3 colBa=colB1*eq(currentTab,0.,.1)
+              +colB2*eq(currentTab,1.,.1)
+              +colB3*eq(currentTab,2.,.1)
+              +colB4*eq(currentTab,3.,.1);
+
+    vec3 colCb=colC1*eq(previousTab,0.,.1)
+              +colC2*eq(previousTab,1.,.1)
+              +colC3*eq(previousTab,2.,.1)
+              +colC4*eq(previousTab,3.,.1);
+
+    vec3 colCa=colC1*eq(currentTab,0.,.1)
+              +colC2*eq(currentTab,1.,.1)
+              +colC3*eq(currentTab,2.,.1)
+              +colC4*eq(currentTab,3.,.1);
+
+    vec3 colDb=colD1*eq(previousTab,0.,.1)
+              +colD2*eq(previousTab,1.,.1)
+              +colD3*eq(previousTab,2.,.1)
+              +colD4*eq(previousTab,3.,.1);
+
+    vec3 colDa=colD1*eq(currentTab,0.,.1)
+              +colD2*eq(currentTab,1.,.1)
+              +colD3*eq(currentTab,2.,.1)
+              +colD4*eq(currentTab,3.,.1);
     
-    vec3 mb=vec3(.1569,.3294,.4196)*eq(currentTab,0.,.1)+vec3(.4196,.1569,.1569)*eq(currentTab,1.,.1);
-    vec3 ma=vec3(.1569,.3294,.4196)*eq(tab,0.,.1)+vec3(.4196,.1569,.1569)*eq(tab,1.,.1);
+    vec3 colA=mix(colAb,colAa,clamp(timeChange,0.,1.));
+    vec3 colB=mix(colBb,colBa,clamp(timeChange,0.,1.));
+    vec3 colC=mix(colCb,colCa,clamp(timeChange,0.,1.));
+    vec3 colD=mix(colDb,colDa,clamp(timeChange,0.,1.));
     
-    vec3 bgb=vec3(.0471,.2549,.2549)*eq(currentTab,0.,.1)+vec3(.2549,.0471,.0471)*eq(currentTab,1.,.1);
-    vec3 bga=vec3(.0471,.2549,.2549)*eq(tab,0.,.1)+vec3(.2549,.0471,.0471)*eq(tab,1.,.1);
-    
-    vec3 brightColor=mix(bb,ba,clamp(timeChange,0.,1.));
-    vec3 mainColor=mix(mb,ma,clamp(timeChange,0.,1.));
-    vec3 backColor=mix(bgb,bga,clamp(timeChange,0.,1.));
-    
-    col=mix(backColor,brightColor,clamp((fbm*fbm)*4.,0.,1.));
-    col=mix(col,mainColor,clamp(length(q),0.,1.));
-    col=mix(col,backColor,clamp(length(r.x),0.,1.));
+    col=mix(colA,colB,clamp((fbm*fbm)*4.,0.,1.));
+    col=mix(col,colC,clamp(length(q),0.,1.));
+    col=mix(col,colD,clamp(length(r.x),0.,1.));
 }
 
 void main()
@@ -195,7 +249,7 @@ void main()
     float viewPortCenter=.5;
     float ratio=u_resolution.y/u_resolution.x;
     
-    // Establishing screen xy values
+    // EscurrentTablishing screen xy values
     vec2 xy=(uv-viewPortCenter)*zoom+zoomCenter;
     xy=vec2(xy.x,xy.y*ratio);
     

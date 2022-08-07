@@ -1,6 +1,6 @@
 :root {
   --animation-duration: 0.25s;
-  --color: rgb(52, 186, 186);
+  --color: rgb(65, 232, 232);
 }
 
 html,
@@ -104,23 +104,35 @@ body,
   font-size: 4em;
 }
 
-.cursor {
-  background-color: #d4d9e1;
+.cursor-on {
+  border-left: 5px solid #d4d9e1 ;
 }
 
-.background-shader {
+.cursor-off {
+  opacity: 0%;
+  border-left: 5px solid #d4d9e1 ;
+}
+
+.shader-background {
+  background-color: #201f29;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+}
+
+.shader {
+  animation-name: item-motion;
+  animation-duration: 2s;
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
   text-align: center;
   z-index: -1;
-  background-color: #201f29;
-}
-
-.background-shader-off {
-  width: 100vh;
-  height: 100vh;
 }
 
 .top-bar {
@@ -176,22 +188,29 @@ button:hover {
   font-weight: 700;
 }
 
-.background-shader {
+.shader-button {
   position: absolute;
-  bottom: 0;
-  text-align: center;
-  z-index: -1;
-  background-color: #201f29;
+  display: flex;
+  align-items: center;
+  z-index: 4;
+}
+
+.shader-hover {
+  animation-name: hover-button;
+  animation-duration: 0.2s;
+  background-color: #d4d9e1;
+  color: #201f29;
+  padding: 10px;
+  font-weight: 700;
+  border-radius: 50px;
 }
 
 .shader-toggle {
-  position: absolute;
   border-radius: 50px;
   margin: 3px;
   height: 40px;
   width: 40px;
-  padding: 0;
-  z-index: 4;
+  padding: 0px;
 }
 
 .warning-background {
@@ -221,4 +240,11 @@ button:hover {
   height: 100vh;
   color: #d4d9e1;
   gap: 50px;
+}
+
+.TEST {
+  color: red;
+  font-size: 2em;
+  position: absolute;
+  bottom: 0;
 }
