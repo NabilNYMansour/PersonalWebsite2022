@@ -3,7 +3,7 @@ import { BackGroundShader } from "./shaders-react-components/backGroundShader";
 import { AboutTab } from "./tabs/aboutTab";
 import { HomeTab } from "./tabs/homeTab";
 import { ProjectsTab } from "./tabs/projectsTab";
-import { WorkTab } from "./tabs/workTab";
+import { ShadersTab } from "./tabs/shadersTab";
 
 export const MainApp = ({
   currentTab,
@@ -49,7 +49,7 @@ export const MainApp = ({
       ) : tab === 2 /* Projects */ ? (
         <ProjectsTab exit={exit} />
       ) : tab === 3 /* Work */ ? (
-        <WorkTab exit={exit} />
+        <ShadersTab exit={exit} />
       ) : (
         <div className={exit ? "main-app-item-exit" : "main-app-item"}>NO TAB SELECTED</div>
       )}

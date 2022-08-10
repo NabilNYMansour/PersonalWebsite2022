@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-
 export const TopBar = ({
   setCurrentTab,
 }: {
@@ -10,7 +8,7 @@ export const TopBar = ({
       <button onClick={() => setCurrentTab(0)}>Home</button>
       <button onClick={() => setCurrentTab(1)}>About</button>
       <button onClick={() => setCurrentTab(2)}>Projects</button>
-      <button onClick={() => setCurrentTab(3)}>Work</button>
+      <button onClick={() => setCurrentTab(3)}>Shaders</button>
     </div>
   );
 };

@@ -21,13 +21,13 @@ export const ShaderToggleButton = ({
       <button
         onMouseEnter={() => setShaderToggleHover(true)}
         onMouseLeave={() => setShaderToggleHover(false)}
-        className="shader-toggle"
+        className="icon"
         onClick={handleShaderToggle}
       >
         <BrushIcon />
       </button>
       {shaderToggleHover && (
-        <div className="shader-hover">
+        <div className="icon-hover">
           {shaderToggle ? "shader ON" : "shader OFF"}
         </div>
       )}

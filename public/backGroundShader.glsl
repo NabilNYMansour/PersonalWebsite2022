@@ -9,6 +9,7 @@ uniform vec2 u_mouse;
 uniform float timeChange;
 uniform float currentTab;
 uniform float previousTab;
+uniform float isTouchDevice;
 
 #define PI 3.1415926538
 
@@ -160,7 +161,7 @@ void fbmRain(vec2 xy,inout vec3 col,float pixel,vec2 mouse)
 {
     vec2 q;
     q.x=fbm(xy+u_time/10.);
-    q.y=fbm(xy-mouse);
+    q.y=fbm(xy-mouse*(1.-isTouchDevice));
     
     vec2 r;
     r.x=snoise(xy+1.*q+vec2(1.7,9.2)+.15*u_time);
@@ -178,7 +179,7 @@ void fbmRain(vec2 xy,inout vec3 col,float pixel,vec2 mouse)
     vec3 colA2=vec3(q.x,q.y,r.x);
     vec3 colB2=vec3(r.x,r.y,q.x);
     vec3 colC2=vec3(q.x*r.x,r.x*q.y,q.y*r.y);
-    vec3 colD2=vec3(r.x-r.y,q.y/q.x,r.y/q.x)*.4;
+    vec3 colD2=vec3(r.x-r.y,q.y/q.x,r.y/q.x)*.2;
     
     vec3 colA3=vec3(q.x,q.y,r.x);
     vec3 colB3=vec3(r.x,r.y,q.x);
@@ -244,21 +245,23 @@ void main()
 {
     // Getting values
     vec2 uv=gl_FragCoord.xy/u_resolution.xy;
-    vec2 mouse = u_mouse.xy/u_resolution.xy;
+    vec2 mouse=u_mouse.xy/u_resolution.xy;
     
     // Setting up view port
     float zoom=10.;
     vec2 zoomCenter=vec2(0.,0.);
     float viewPortCenter=.5;
-    float ratio=u_resolution.y/u_resolution.x;
+    float ratioX=u_resolution.y/u_resolution.x;
+    float ratioY=u_resolution.x/u_resolution.y;
     
     // EscurrentTablishing screen xy values
     vec2 xy=(uv-viewPortCenter)*zoom+zoomCenter;
-    xy=vec2(xy.x,xy.y*ratio);
+    float xIsBigger=gt(u_resolution.x,u_resolution.y);
+    xy=vec2(xy.x,xy.y*ratioX)*xIsBigger+vec2(xy.x*ratioY,xy.y)*(1.-xIsBigger);
     xy=rotate(xy,-PI/4.);
-
+    
     // Establishing mouse xy values
-    mouse = (mouse - viewPortCenter) * zoom + zoomCenter;
+    mouse=(mouse-viewPortCenter)*zoom+zoomCenter;
     // mouse.y *= ratio;
     mouse=rotate(mouse,-PI/4.);
     
@@ -268,7 +271,7 @@ void main()
     // Color init
     vec3 col=vec3(0.);
     
-    fbmRain(xy,col,pixel,mouse/8.);
-
+    fbmRain(xy,col,pixel,mouse/20.);
+    
     gl_FragColor=vec4(col,1);
 }

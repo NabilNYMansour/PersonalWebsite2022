@@ -1,6 +1,12 @@
 import ShaderCanvas from "@signal-noise/react-shader-canvas";
 import { useEffect, useState } from "react";
 
+const isTouchDevice = () => {  
+  return (('ontouchstart' in window) ||  
+    (navigator.maxTouchPoints > 0) ||  
+    (navigator.msMaxTouchPoints > 0) ? 1 : 0);  
+}  
+
 function getWindowDimensions() {
   const { innerWidth: width, innerHeight: height } = window;
   return {
@@ -20,7 +26,11 @@ export default function useWindowDimensions() {
     }
 
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener("orientationchange", handleResize);
+    return () => [
+      window.removeEventListener("resize", handleResize),
+      window.removeEventListener("orientationchange", handleResize),
+    ];
   }, []);
 
   return windowDimensions;
@@ -34,7 +44,7 @@ export const BackGroundShader = ({ shaderToggle, tabQueue, setTabQueue }) => {
   const [previousTabInQueue, setPreviousTabInQueue] = useState(0);
 
   const getShader = async () => {
-    fetch("/shaders/backGroundShader.glsl")
+    fetch("/backGroundShader.glsl")
       .then((r) => r.text())
       .then((text) => {
         setShader(text);
@@ -43,6 +53,7 @@ export const BackGroundShader = ({ shaderToggle, tabQueue, setTabQueue }) => {
 
   useEffect(() => {
     getShader();
+    console.log(height, width, isTouchDevice());
   }, []);
 
   // Trial and Error frankly, it works tho :)
@@ -76,6 +87,7 @@ export const BackGroundShader = ({ shaderToggle, tabQueue, setTabQueue }) => {
               currentTab: currentTabInQueue,
               previousTab: previousTabInQueue,
               timeChange: timeChange,
+              isTouchDevice: isTouchDevice()
             }}
             width={width}
             height={height}

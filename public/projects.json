@@ -1,3 +1,23 @@
-{
-    "item" : "test"
-}
+[
+  {
+    "name": "Maze Generator",
+    "desc": "A web app that allows for the generation of random mazes. It also showcases an RBAC system that allow the user to create, delete, or just view the mazes",
+    "link": "https://nabilmansour.com/MazeGen/",
+    "gitLink": "https://github.com/NabilNYMansour/Maze-Gen-Web-App",
+    "imgLink": "mazeGen.png"
+  },
+  {
+    "name": "Linear Algebra Calculator",
+    "desc": "A react app that allows for the calculation of linear algebra operations applied to two matrices that the user places.",
+    "link": "https://nabilmansour.com/LinAlgCalculator/",
+    "gitLink": "https://github.com/NabilNYMansour/LinAlgCalculator",
+    "imgLink": "linAlg.png"
+  },
+  {
+    "name": "Poly Plotter",
+    "desc": "A react app that allows for the rendering of polynomials on a graph using canvas HTML.",
+    "link": "https://nabilmansour.com/PolyPlotter/",
+    "gitLink": "https://github.com/NabilNYMansour/PolyPlotter",
+    "imgLink": "polyPlotter.png"
+  }
+]
