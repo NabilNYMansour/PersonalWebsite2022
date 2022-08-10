@@ -45,28 +45,26 @@ export const MainApp = ({
 
   return (
     <div>
-      {tab === 0 /* Home */ ? (
-        <HomeTab exit={exit} setCurrentTab={setCurrentTab} />
-      ) : tab === 1 /* About */ ? (
-        <AboutTab exit={exit} />
-      ) : tab === 2 /* Projects */ ? (
-        <ProjectsTab exit={exit} />
-      ) : tab === 3 /* Work */ ? (
-        <ShadersTab exit={exit} />
-      ) : (
-        <div className={exit ? "main-app-item-exit" : "main-app-item"}>
-          NO TAB SELECTED
-        </div>
-      )}
+        {tab === 0  ? (
+          <HomeTab exit={exit} setCurrentTab={setCurrentTab} />
+        ) : tab === 1  ? (
+          <AboutTab exit={exit} />
+        ) : tab === 2  ? (
+          <ProjectsTab exit={exit} />
+        ) : tab === 3  ? (
+          <ShadersTab exit={exit} />
+        ) : (
+          <div className={exit ? "main-app-item-exit" : "main-app-item"}>
+            NO TAB SELECTED
+          </div>
+        )}
 
       {/* Background shader */}
-      {!isPhone && (
-        <BackGroundShader
-          shaderToggle={shaderToggle}
-          tabQueue={tabQueue}
-          setTabQueue={setTabQueue}
-        />
-      )}
+      <BackGroundShader
+        shaderToggle={shaderToggle}
+        tabQueue={tabQueue}
+        setTabQueue={setTabQueue}
+      />
     </div>
   );
 };

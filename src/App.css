@@ -9,17 +9,10 @@
   --small-size: 1.1em;
 }
 
-@media screen and (max-width: 900px) {
-  :root {
-    --title: 2em;
-    --sub-title: 1.5em;
-    --big-size: 1.5em;
-    --mid-size: 1em;
-    --small-size: 0.9em;
-  }
-}
-
-@media screen and (max-height: 900px) {
+@media screen and (max-width: 900px),
+  screen and (max-height: 900px),
+  (pointer: none),
+  (pointer: coarse) {
   :root {
     --title: 2em;
     --sub-title: 1.5em;
@@ -39,7 +32,7 @@ body,
 
 #root {
   height: 100%;
-  font-family: "Courier New", Courier, monospace;
+  font-family: "Courier", Courier, monospace;
   overflow: hidden;
 }
 
@@ -64,9 +57,10 @@ body,
 .main-app-home {
   animation-name: item-motion;
   animation-duration: var(--animation-duration);
-  padding-top: 30vh;
+  height: 80vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   color: #d4d9e1;
   gap: 40px;
@@ -75,9 +69,10 @@ body,
 .main-app-home-exit {
   animation-name: item-motion-reverse;
   animation-duration: var(--animation-duration);
-  padding-top: 30vh;
+  height: 80vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   color: #d4d9e1;
   gap: 40px;
@@ -179,10 +174,10 @@ body,
 
 .top-bar {
   position: absolute;
-  width: 100%;
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: center;
-  background-color: #201f29a0;
   gap: 10px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -190,10 +185,14 @@ body,
 }
 
 .bar {
+  background-color: #201f29f0;
   display: flex;
   justify-content: center;
   gap: 10px;
-  padding: 4px;
+  padding: 8px;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-radius: 10px;
   font-size: var(--mid-size);
 }
 
@@ -287,35 +286,6 @@ button:hover {
   justify-content: center;
   align-items: center;
   transform: scale(2, 2);
-}
-
-.warning-background {
-  background-color: #201f29;
-}
-
-.warning-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  height: 100vh;
-  color: #d4d9e1;
-  gap: 50px;
-}
-
-.warning-container-fade {
-  animation-name: item-motion-reverse;
-  animation-duration: 0.5s;
-  opacity: 0%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  height: 100vh;
-  color: #d4d9e1;
-  gap: 50px;
 }
 
 .projects-container {
@@ -426,16 +396,36 @@ button:hover {
   position: relative;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 900px),
+  screen and (max-height: 900px),
+  (pointer: none),
+  (pointer: coarse) {
   .top-bar {
-    /* position: relative; */
-    bottom: 10px;
-    justify-content: center;
+    bottom: 0px;
     gap: 0px;
   }
 
   .about-table {
     grid-template-columns: auto;
+  }
+
+  .title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: var(--title);
+  }
+
+  .about-me-title {
+    font-size: var(--title);
+  }
+
+  .name {
+    color: var(--color);
+  }
+
+  .sub-title {
+    font-size: var(--sub-title);
   }
 
   .main-app-item {
@@ -462,35 +452,27 @@ button:hover {
     font-weight: 500;
   }
 
-
   .links-buttons {
     gap: 20px;
   }
 
-
-  .projects-container {
-    border-radius: 5px;
-    background-color: #d4d9e1c0;
-    color: #201f29;
-    /* width: 90vw; */
-    height: 54vh;
+  .project-desc {
+    background-color: #201f29;
+    padding: 20px;
+    border-radius: 4px;
+    color: #d4d9e1;
+    min-width: 260px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 25px;
-    padding: 50px;
-    overflow-y: scroll;
+    justify-content: space-between;
   }
 
   .project {
-    display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     gap: 30px;
   }
-
 
   .project-img {
     border-radius: 4px;
@@ -498,90 +480,5 @@ button:hover {
     max-height: 130px;
     min-width: 260px;
     min-height: 130px;
-  }
-
-  html,
-  body,
-  #app,
-  #app > div {
-    height: 100%;
-    overflow-y: hidden;
-    background-color: #201f29;
-  }
-}
-
-@media screen and (max-height: 900px) {
-  .top-bar {
-    /* position: relative; */
-    bottom: 10px;
-    justify-content: center;
-    gap: 0px;
-  }
-
-  .about-table {
-    grid-template-columns: auto;
-  }
-
-  .main-app-item {
-    gap: 10px;
-    padding-top: 8vh;
-    padding-left: 5vw;
-    padding-right: 5vw;
-    height: 70vh;
-    justify-content: space-between;
-  }
-
-  .main-app-item-exit {
-    gap: 10px;
-    padding-top: 8vh;
-    padding-left: 5vw;
-    padding-right: 5vw;
-    height: 70vh;
-    justify-content: space-between;
-  }
-
-  button {
-    padding-left: 10px;
-    padding-right: 10px;
-    font-weight: 500;
-  }
-
-
-  .links-buttons {
-    gap: 20px;
-  }
-
-
-  .projects-container {
-    border-radius: 5px;
-    background-color: #d4d9e1c0;
-    color: #201f29;
-    /* width: 90vw; */
-    height: 54vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 25px;
-    padding: 50px;
-    overflow-y: scroll;
-  }
-
-  .project {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-  }
-
-
-  html,
-  body,
-  #app,
-  #app > div {
-    height: 100%;
-    overflow-y: hidden;
-    background-color: #201f29;
   }
 }

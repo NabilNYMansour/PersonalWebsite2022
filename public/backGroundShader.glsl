@@ -1,5 +1,5 @@
 #ifdef GL_ES
-precision mediump float;
+precision highp float;
 #endif
 
 uniform vec2 u_resolution;
@@ -145,14 +145,23 @@ float fbm(vec2 xy)// Fractal Brownian Motion
     float amp=.5;
     float lac=2.;
     
-    for(int i=0;i<FBNLOOP;i++)
-    {
+    if (isTouchDevice == 1.) {
         float n=snoise(xy);
-        val+=amp*(n*.5+.5);// Regular FBN
-        //val += amp * abs(n); // turbulence FBN
-        //val += amp * pow(1.-abs(n), 2.); // ridge FBN
+        // val+=amp*(n*.5+.5);// Regular FBN
+        // val += amp * abs(n); // turbulence FBN
+        val += amp * pow(1.-abs(n), 2.); // ridge FBN
         xy*=lac;
         amp*=.5;
+    } else {
+        for(int i=0;i<FBNLOOP;i++)
+            {
+                float n=snoise(xy);
+                val+=amp*(n*.5+.5);// Regular FBN
+                //val += amp * abs(n); // turbulence FBN
+                //val += amp * pow(1.-abs(n), 2.); // ridge FBN
+                xy*=lac;
+                amp*=.5;
+            }
     }
     return val;
 }
@@ -170,26 +179,28 @@ void fbmRain(vec2 xy,inout vec3 col,float pixel,vec2 mouse)
     vec2 p=xy+q-r;
     
     float fbm=fbm(p);
+
+    float dim = 0.2*isTouchDevice;
     
-    vec3 colA1=vec3(.101961,.619608,.666667);
-    vec3 colB1=vec3(.666667,.666667,.498039);
-    vec3 colC1=vec3(0,0,.164706);
-    vec3 colD1=vec3(.5,.75,.75);
-    
-    vec3 colA2=vec3(q.x,q.y,r.x);
-    vec3 colB2=vec3(r.x,r.y,q.x);
-    vec3 colC2=vec3(q.x*r.x,r.x*q.y,q.y*r.y);
-    vec3 colD2=vec3(r.x-r.y,q.y/q.x,r.y/q.x)*.2;
+    vec3 colA1=vec3(.101961,.619608,.666667) - dim;
+    vec3 colB1=vec3(.666667,.666667,.498039) - dim;
+    vec3 colC1=vec3(0,0,.164706) - dim;
+    vec3 colD1=vec3(.5,.75,.75) - dim;
+
+    vec3 colA2=vec3(q.x      , q.y      , r.x);
+    vec3 colB2=vec3(r.x      , r.y      , q.x);
+    vec3 colC2=vec3(q.x*r.x  , r.x*q.y  , q.y*r.y);
+    vec3 colD2=vec3(r.x-r.y  , 0.  , r.y/q.x)*.2;
     
     vec3 colA3=vec3(q.x,q.y,r.x);
     vec3 colB3=vec3(r.x,r.y,q.x);
     vec3 colC3=vec3(q.x+r.x,r.x*q.y,0.);
-    vec3 colD3=vec3(r.x+r.y,q.y/q.x,r.y-q.x)*.5;
+    vec3 colD3=vec3(r.x+r.y,0.,r.y-q.x)*.5;
     
-    vec3 colA4=vec3(q.y*r.y,q.x*r.x,q.y*r.y)*.1;
-    vec3 colB4=vec3(q.y*r.y*6.,q.x*r.x,q.y-r.y);
-    vec3 colC4=vec3(r.y-r.y,r.x/r.x,q.y+q.y)*.75;
-    vec3 colD4=vec3(q.y*r.y,q.x*r.x,q.y*r.y)*.2;
+    vec3 colA4=vec3(q.y*r.y    , q.x*r.x,  q.y*r.y)*.1;
+    vec3 colB4=vec3(q.y*r.y*6. , q.x*r.x,  q.y-r.y);
+    vec3 colC4=vec3(r.y-r.y    , r.x/r.x,  q.y+q.y)*.75;
+    vec3 colD4=vec3(q.y*r.y    , q.x*r.x,  q.y*r.y)*.2;
     
     vec3 colAb=colA1*eq(previousTab,0.,.1)
     +colA2*eq(previousTab,1.,.1)

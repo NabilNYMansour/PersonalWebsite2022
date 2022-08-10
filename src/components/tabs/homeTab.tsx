@@ -72,24 +72,24 @@ export const HomeTab = ({
 
   return (
     <div className={exit ? "main-app-home-exit" : "main-app-home"}>
-      <div className="title">
-        Hi, I'm <span className="name">Nabil Mansour</span>
-      </div>
-      <div className="sub-title">
-        {profession.slice(0, currentPos)}
-        {profession.length !== currentPos ? (
-          <span className="cursor-on">&nbsp;</span>
-        ) : showCursor ? (
-          <span className="cursor-on">&nbsp;</span>
-        ) : (
-          <span className="cursor-off">&nbsp;</span>
-        )}
-      </div>
-      <div className="bar">
-        <button onClick={() => setCurrentTab(1)}>About</button>
-        <button onClick={() => setCurrentTab(2)}>Projects</button>
-        <button onClick={() => setCurrentTab(3)}>Shaders</button>
-      </div>
+        <div className="title">
+          Hi, I'm <span className="name">Nabil Mansour</span>
+        </div>
+        <div className="sub-title">
+          {profession.slice(0, currentPos)}
+          {profession.length !== currentPos ? (
+            <span className="cursor-on">&nbsp;</span>
+          ) : showCursor ? (
+            <span className="cursor-on">&nbsp;</span>
+          ) : (
+            <span className="cursor-off">&nbsp;</span>
+          )}
+        </div>
+        <div className="bar">
+          <button onClick={() => setCurrentTab(1)}>About</button>
+          <button onClick={() => setCurrentTab(2)}>Projects</button>
+          <button onClick={() => setCurrentTab(3)}>Shaders</button>
+        </div>
     </div>
   );
 };
