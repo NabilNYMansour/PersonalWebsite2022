@@ -9,8 +9,17 @@
   --small-size: 1.1em;
 }
 
+@media screen and (max-width: 900px) {
+  :root {
+    --title: 2em;
+    --sub-title: 1.5em;
+    --big-size: 1.5em;
+    --mid-size: 1em;
+    --small-size: 0.9em;
+  }
+}
 
-@media screen and (max-width: 650px) {
+@media screen and (max-height: 900px) {
   :root {
     --title: 2em;
     --sub-title: 1.5em;
@@ -121,9 +130,6 @@ body,
 }
 
 .about-table {
-  /* display: flex;
-  flex-direction: row;
-  flex-wrap: wrap; */
   display: grid;
   grid-template-columns: auto auto;
   gap: 50px;
@@ -133,16 +139,11 @@ body,
 
 .entry {
   font-size: var(--mid-size);
-  /* width: 700px; */
 }
 
 .entry-header-text {
   font-size: var(--mid-size);
   font-weight: 700;
-}
-
-.links-header {
-  font-size: var(--mid-size);
 }
 
 .cursor-on {
@@ -238,9 +239,13 @@ button:hover {
 .links {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   gap: 35px;
+}
+
+.links-header {
+  font-size: var(--mid-size);
 }
 
 .links-buttons {
@@ -423,14 +428,14 @@ button:hover {
 
 @media screen and (max-width: 900px) {
   .top-bar {
-    bottom: 0;
+    /* position: relative; */
+    bottom: 10px;
     justify-content: center;
+    gap: 0px;
   }
-  
+
   .about-table {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    grid-template-columns: auto;
   }
 
   .main-app-item {
@@ -438,5 +443,145 @@ button:hover {
     padding-top: 8vh;
     padding-left: 5vw;
     padding-right: 5vw;
+    height: 70vh;
+    justify-content: space-between;
+  }
+
+  .main-app-item-exit {
+    gap: 10px;
+    padding-top: 8vh;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    height: 70vh;
+    justify-content: space-between;
+  }
+
+  button {
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: 500;
+  }
+
+
+  .links-buttons {
+    gap: 20px;
+  }
+
+
+  .projects-container {
+    border-radius: 5px;
+    background-color: #d4d9e1c0;
+    color: #201f29;
+    /* width: 90vw; */
+    height: 54vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    padding: 50px;
+    overflow-y: scroll;
+  }
+
+  .project {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+  }
+
+
+  .project-img {
+    border-radius: 4px;
+    max-width: 260px;
+    max-height: 130px;
+    min-width: 260px;
+    min-height: 130px;
+  }
+
+  html,
+  body,
+  #app,
+  #app > div {
+    height: 100%;
+    overflow-y: hidden;
+    background-color: #201f29;
+  }
+}
+
+@media screen and (max-height: 900px) {
+  .top-bar {
+    /* position: relative; */
+    bottom: 10px;
+    justify-content: center;
+    gap: 0px;
+  }
+
+  .about-table {
+    grid-template-columns: auto;
+  }
+
+  .main-app-item {
+    gap: 10px;
+    padding-top: 8vh;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    height: 70vh;
+    justify-content: space-between;
+  }
+
+  .main-app-item-exit {
+    gap: 10px;
+    padding-top: 8vh;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    height: 70vh;
+    justify-content: space-between;
+  }
+
+  button {
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: 500;
+  }
+
+
+  .links-buttons {
+    gap: 20px;
+  }
+
+
+  .projects-container {
+    border-radius: 5px;
+    background-color: #d4d9e1c0;
+    color: #201f29;
+    /* width: 90vw; */
+    height: 54vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    padding: 50px;
+    overflow-y: scroll;
+  }
+
+  .project {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+  }
+
+
+  html,
+  body,
+  #app,
+  #app > div {
+    height: 100%;
+    overflow-y: hidden;
+    background-color: #201f29;
   }
 }

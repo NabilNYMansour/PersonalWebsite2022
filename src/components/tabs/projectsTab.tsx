@@ -10,9 +10,9 @@ interface project {
   imgLink: string;
 }
 
-const ProjectRender = ({ project, key }: { project: project; key: number }) => {
+const ProjectRender = ({ project }: { project: project }) => {
   return (
-    <div key={key} className="project">
+    <div className="project">
       {/* <div className="example-img" /> */}
       <a href={project.link} target="_blank" rel="noreferrer">
         <img src={project.imgLink} className="project-img" alt={project.name} />
@@ -39,13 +39,16 @@ const ProjectRender = ({ project, key }: { project: project; key: number }) => {
 
 export const ProjectsTab = ({ exit }: { exit: boolean }) => {
   const [projects, setProjects] = useState<project[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const getProjects = async () => {
+    setLoading(true);
     fetch("/projects.json")
       .then((response) => response.json())
       .then((data) => {
         setProjects(data);
-      });
+      })
+      .finally(() => setLoading(false));
   };
 
   useEffect(() => {
@@ -55,11 +58,17 @@ export const ProjectsTab = ({ exit }: { exit: boolean }) => {
   return (
     <div className={exit ? "main-app-item-exit" : "main-app-item"}>
       <div className="title">Projects</div>
-      <div className="projects-container">
-        {projects.map((project, i) => (
-          <ProjectRender project={project} key={i} />
-        ))}
-      </div>
+      {loading ? (
+        <div className="title">loading</div>
+      ) : (
+        <div className="projects-container">
+          {projects.map((project, i) => (
+            <div key={i}>
+              <ProjectRender project={project} />
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

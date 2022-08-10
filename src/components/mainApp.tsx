@@ -9,10 +9,12 @@ export const MainApp = ({
   currentTab,
   setCurrentTab,
   shaderToggle,
+  isPhone,
 }: {
   currentTab: number;
   setCurrentTab: (newTab: number) => void;
   shaderToggle: boolean;
+  isPhone: boolean;
 }) => {
   // Current tab changes
   const [tab, setTab] = useState<number>(0);
@@ -26,6 +28,7 @@ export const MainApp = ({
 
   useEffect(() => {
     setHasStarted(true);
+    console.log(isPhone);
   }, []);
 
   useEffect(() => {
@@ -51,15 +54,19 @@ export const MainApp = ({
       ) : tab === 3 /* Work */ ? (
         <ShadersTab exit={exit} />
       ) : (
-        <div className={exit ? "main-app-item-exit" : "main-app-item"}>NO TAB SELECTED</div>
+        <div className={exit ? "main-app-item-exit" : "main-app-item"}>
+          NO TAB SELECTED
+        </div>
       )}
 
       {/* Background shader */}
-      <BackGroundShader
-        shaderToggle={shaderToggle}
-        tabQueue={tabQueue}
-        setTabQueue={setTabQueue}
-      />
+      {!isPhone && (
+        <BackGroundShader
+          shaderToggle={shaderToggle}
+          tabQueue={tabQueue}
+          setTabQueue={setTabQueue}
+        />
+      )}
     </div>
   );
 };

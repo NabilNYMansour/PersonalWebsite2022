@@ -30,7 +30,7 @@ export const AboutTab = ({ exit }: { exit: boolean }) => {
         </div>
         <div className="entry">
           <div className="entry-header-text">What I am Currently Learning</div>
-          From the background, you can see that I am into{" "}
+          From the background (if on PC), you can see that I am into{" "}
           <span className="name">shaders</span>. This has been something I've
           been learning for a while as{" "}
           <span className="name">GPU programming</span> seems to be uncharted
