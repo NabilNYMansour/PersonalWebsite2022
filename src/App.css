@@ -211,7 +211,7 @@ button {
   background-color: #00000000;
   color: #d4d9e1;
   border: none;
-  font-size: var(--mid-size);
+  font-size: var(--small-size);
   margin: 5px;
   padding-left: 20px;
   padding-right: 20px;

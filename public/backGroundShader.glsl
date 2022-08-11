@@ -190,17 +190,17 @@ void fbmRain(vec2 xy,inout vec3 col,float pixel,vec2 mouse)
     vec3 colA2=vec3(q.x      , q.y      , r.x);
     vec3 colB2=vec3(r.x      , r.y      , q.x);
     vec3 colC2=vec3(q.x*r.x  , r.x*q.y  , q.y*r.y);
-    vec3 colD2=vec3(r.x-r.y  , 0.  , r.y/q.x)*.2;
+    vec3 colD2=vec3(r.x-r.y  , 0.       , r.y+q.x)*.2;
     
-    vec3 colA3=vec3(q.x,q.y,r.x);
-    vec3 colB3=vec3(r.x,r.y,q.x);
-    vec3 colC3=vec3(q.x+r.x,r.x*q.y,0.);
-    vec3 colD3=vec3(r.x+r.y,0.,r.y-q.x)*.5;
+    vec3 colA3=vec3(q.x      , q.y      , r.x);
+    vec3 colB3=vec3(r.x      , r.y      , q.x);
+    vec3 colC3=vec3(q.x+r.x  , r.x*q.y  , 0.);
+    vec3 colD3=vec3(r.x+r.y  , q.x+q.y  , r.y-q.x)*.5;
     
-    vec3 colA4=vec3(q.y*r.y    , q.x*r.x,  q.y*r.y)*.1;
-    vec3 colB4=vec3(q.y*r.y*6. , q.x*r.x,  q.y-r.y);
-    vec3 colC4=vec3(r.y-r.y    , r.x/r.x,  q.y+q.y)*.75;
-    vec3 colD4=vec3(q.y*r.y    , q.x*r.x,  q.y*r.y)*.2;
+    vec3 colA4=vec3(q.y*r.y    , q.x*r.x  , q.y*r.y)*.1;
+    vec3 colB4=vec3(q.y*r.y*6. , q.x*r.x  , q.y-r.y);
+    vec3 colC4=vec3(r.y-r.y    , r.x/r.x  , q.y+q.y)*.75;
+    vec3 colD4=vec3(q.y*r.y    , q.x*r.x  , q.y*r.y)*.2;
     
     vec3 colAb=colA1*eq(previousTab,0.,.1)
     +colA2*eq(previousTab,1.,.1)

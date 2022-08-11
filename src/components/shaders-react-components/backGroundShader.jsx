@@ -53,7 +53,6 @@ export const BackGroundShader = ({ shaderToggle, tabQueue, setTabQueue }) => {
 
   useEffect(() => {
     getShader();
-    console.log(height, width, isTouchDevice());
   }, []);
 
   // Trial and Error frankly, it works tho :)
@@ -75,7 +74,6 @@ export const BackGroundShader = ({ shaderToggle, tabQueue, setTabQueue }) => {
     if (tabQueue.length >= 2) {
       setTabQueue([...tabQueue].slice(0, tabQueue.length - 1));
     }
-    console.log(tabQueue);
   }, [tabQueue]);
 
   return (

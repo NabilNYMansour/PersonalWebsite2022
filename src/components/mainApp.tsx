@@ -28,7 +28,6 @@ export const MainApp = ({
 
   useEffect(() => {
     setHasStarted(true);
-    console.log(isPhone);
   }, []);
 
   useEffect(() => {
