@@ -9,7 +9,7 @@ function App() {
   const [currentTab, setCurrentTab] = useState<number>(0);
   const [shaderToggle, setShaderToggle] = useState<boolean>(true);
 
-  const [shaderToggleHover, setShaderToggleHover] = useState<boolean>(false);
+  const [shaderToggleHover, setShaderToggleHover] = useState<boolean>(true);
 
   const isPhone = useMediaQuery("(pointer:none), (pointer:coarse)");
 

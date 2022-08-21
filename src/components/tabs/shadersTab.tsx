@@ -29,8 +29,8 @@ export const ShadersTab = ({ exit }: { exit: boolean }) => {
             <iframe
               title={shader.name}
               key={i}
-              width="640"
-              height="360"
+              width="400"
+              height="400"
               src={shader.codeLink}
             />
           ))}
