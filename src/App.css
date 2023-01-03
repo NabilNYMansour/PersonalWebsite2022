@@ -112,24 +112,12 @@ body,
   font-size: var(--title);
 }
 
-.about-me-title {
-  font-size: var(--title);
-}
-
 .name {
   color: var(--color);
 }
 
 .sub-title {
   font-size: var(--sub-title);
-}
-
-.about-table {
-  display: grid;
-  grid-template-columns: auto auto;
-  gap: 50px;
-  height: 50vh;
-  overflow-y: scroll;
 }
 
 .entry {
@@ -238,9 +226,9 @@ button:hover {
 .links {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-  gap: 35px;
+  height: 50vh;
 }
 
 .links-header {
@@ -250,7 +238,7 @@ button:hover {
 .links-buttons {
   display: flex;
   flex-direction: row;
-  gap: 50px;
+  gap: 200px;
 }
 
 .icon-hover {
@@ -265,6 +253,7 @@ button:hover {
 
 .icon-hover-off {
   color: #d4d9e1;
+  padding: 10px;
   font-weight: 700;
   border-radius: 50px;
 }
@@ -285,7 +274,7 @@ button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  transform: scale(2, 2);
+  transform: scale(5, 5);
 }
 
 .projects-container {
@@ -405,18 +394,10 @@ button:hover {
     gap: 0px;
   }
 
-  .about-table {
-    grid-template-columns: auto;
-  }
-
   .title {
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: var(--title);
-  }
-
-  .about-me-title {
     font-size: var(--title);
   }
 
@@ -453,7 +434,16 @@ button:hover {
   }
 
   .links-buttons {
-    gap: 20px;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .icon-large {
+    transform: scale(2, 2);
+  }
+
+  .links {
+    height: 75vh;
   }
 
   .project-desc {
@@ -468,7 +458,7 @@ button:hover {
   }
 
   .project {
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 30px;
@@ -476,8 +466,8 @@ button:hover {
 
   .project-img {
     border-radius: 4px;
-    max-width: 260px;
-    max-height: 260px;
+    max-width: 300px;
+    max-height: 300px;
     min-width: 300px;
     min-height: 300px;
     object-fit: cover

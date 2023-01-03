@@ -21,11 +21,11 @@ const ProjectRender = ({ project }: { project: project }) => {
         <div className="project-desc-name">{project.name}</div>
         <div className="project-desc-text">{project.desc}</div>
         <div className="project-desc-links">
-          <a href={project.link} target="_blank" rel="noreferrer">
+          {project.link ? <a href={project.link} target="_blank" rel="noreferrer">
             <button className="project-icon">
               <LaunchIcon />
             </button>
-          </a>
+          </a> : null}
           <a href={project.gitLink} target="_blank" rel="noreferrer">
             <button className="project-icon">
               <GitHubIcon />

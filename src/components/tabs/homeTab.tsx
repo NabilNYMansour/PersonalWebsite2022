@@ -86,7 +86,7 @@ export const HomeTab = ({
           )}
         </div>
         <div className="bar">
-          <button onClick={() => setCurrentTab(1)}>About</button>
+          <button onClick={() => setCurrentTab(1)}>Contacts</button>
           <button onClick={() => setCurrentTab(2)}>Projects</button>
           <button onClick={() => setCurrentTab(3)}>Shaders</button>
         </div>

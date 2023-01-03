@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { BackGroundShader } from "./shaders-react-components/backGroundShader";
-import { AboutTab } from "./tabs/aboutTab";
+import { AboutTab } from "./tabs/contactsTab";
 import { HomeTab } from "./tabs/homeTab";
 import { ProjectsTab } from "./tabs/projectsTab";
 import { ShadersTab } from "./tabs/shadersTab";

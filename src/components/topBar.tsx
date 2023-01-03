@@ -10,7 +10,7 @@ export const TopBar = ({
             Home
           </button>
           <button onClick={() => setCurrentTab(1)}>
-            About
+            Contacts
           </button>
           <button onClick={() => setCurrentTab(2)}>
             Projects
