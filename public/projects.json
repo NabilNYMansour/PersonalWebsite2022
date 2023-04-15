@@ -1,23 +1,16 @@
 [
   {
+    "name": "Fractal Explorer",
+    "desc": "A VR experience where the player explores an endless fractal world made with the ray marching algorithm.",
+    "link": "https://nabilmansour.com/FractalExplorer/",
+    "gitLink": "https://github.com/NabilNYMansour/Fractal-Explorer",
+    "imgLink": "fractalexplorer.png"
+  },
+  {
     "name": "Slime Simulation",
     "desc": "An implementation of slime mold cellular automata. Written in Python using the modernGL library and compute shaders written in GLSL.",
     "gitLink": "https://github.com/NabilNYMansour/Slime-Simulation",
     "imgLink": "slime.png"
-  },
-  {
-    "name": "Maze Generator",
-    "desc": "A web app that allows for the generation of random mazes. It also showcases an RBAC system that allow the user to create, delete, or just view the mazes",
-    "link": "https://nabilmansour.com/MazeGen/",
-    "gitLink": "https://github.com/NabilNYMansour/Maze-Gen-Web-App",
-    "imgLink": "mazeGen.png"
-  },
-  {
-    "name": "Poly Plotter",
-    "desc": "A react app that allows for the rendering of polynomials on a graph using canvas HTML.",
-    "link": "https://nabilmansour.com/PolyPlotter/",
-    "gitLink": "https://github.com/NabilNYMansour/PolyPlotter",
-    "imgLink": "polyPlotter.png"
   },
   {
     "name": "Voxel Terrain",

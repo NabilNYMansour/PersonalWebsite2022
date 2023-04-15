@@ -1,5 +1,9 @@
 [
     {
+        "name" : "Glowing Menger Sponge",
+        "codeLink" : "https://www.shadertoy.com/embed/cs3Gz4?gui=true&t=10&paused=true&muted=false"
+    },
+    {
         "name" : "Mandelbrot Bouquet",
         "codeLink" : "https://www.shadertoy.com/embed/7s3yzS?gui=true&t=10&paused=true&muted=false"
     },

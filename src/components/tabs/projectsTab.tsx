@@ -14,7 +14,7 @@ const ProjectRender = ({ project }: { project: project }) => {
   return (
     <div className="project">
       {/* <div className="example-img" /> */}
-      <a href={project.link} target="_blank" rel="noreferrer">
+      <a href={project.link ? project.link : project.gitLink} target="_blank" rel="noreferrer">
         <img src={project.imgLink} className="project-img" alt={project.name} />
       </a>
       <div className="project-desc">

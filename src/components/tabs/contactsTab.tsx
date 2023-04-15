@@ -53,7 +53,7 @@ export const AboutTab = ({ exit }: { exit: boolean }) => {
             </button>
           </a>
           <a
-            href="mailto:n1mansour@ryerson.ca"
+            href="mailto:nabilnymansour@gmail.com"
             target="_blank"
             rel="noreferrer"
           >
